@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useState, useEffect } from "react";
 import {Text} from "@nextui-org/react";
-// import ArticleCard from '../../components/ArticleCard';
+import ArticleCard from '../../components/ArticleCard';
 
 const MainFeed: NextPage = () => {
     const supabaseClient = useSupabaseClient();
@@ -23,11 +23,11 @@ const MainFeed: NextPage = () => {
                 .select("*")
                 .limit(10)
             console.log(data);
-            if(data != null) {
+            if (data != null) {
                 setArticles(data);
             }
-        } catch (error: any) {
-            alert(error.message);
+        } catch (error) {
+            alert((error as Error).message);
         }
     }
     
@@ -46,9 +46,9 @@ const MainFeed: NextPage = () => {
                 Check out articles from users here
             </Text>
             {/* Article Card */}
-            {/* {articles.map((article) => (
-                <ArticleCard article={article}/>
-            ))} */}
+            {articles.map((article) => (
+                <ArticleCard key={article} article={article}/>
+            ))}
         </>
     )
 }
